@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .mainbody {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #004080; /* Dark Blue Button */
+            font-family: 'Libre Franklin', sans-serif;
+        }
+
+        .container {
+            border-radius: 10px;
+            background-color: #FFFFFF; /* White Container */
+            padding: 20px;
+            text-align: center;
+        }
+
+        .input-field {
+            width: 300px;
+            height: 40px;
+            margin-bottom: 20px;
+            border: 1px solid #B0CFF7; /* Light Blue Border */
+            border-radius: 5px;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .label {
+            font-size: 18px;
+            color: #004080; /* Dark Blue Text */
+        }
+
+        .button {
+            width: 200px;
+            height: 50px;
+            background-color: #004080; /* Dark Blue Button */
+            color: #FFFFFF; /* White Text */
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #00254D; /* Darker Blue on Hover */
+        }
+
+        #mainCaptcha {
+            font-size: 24px;
+            color: #004080; /* Dark Blue Text */
+            margin-bottom: 10px;
+        }
+
+        #refresh {
+            background-color: #B0CFF7; /* Light Blue Button */
+            color: #000000; /* Black Text */
+            font-size: 16px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #refresh:hover {
+            background-color: #80A6D7; /* Darker Blue on Hover */
+        }
+        .heading{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Libre Franklin', sans-serif;
+            background-color: #004080;
+            color: white;
+        }
+        h1{
+            text-align: center;
+            font-weight: 1000;
+            color: white;
+            letter-spacing: 4px;
+            margin: 0;
+            margin-top: 150px;
+        }
+    </style>
+</head>
+<body onload="Captcha();" style="margin: 0;">
+    <div class="heading">
+            <h1>Login Form</h1>
+    </div>
+    <div class="mainbody"> 
+        <div class="container">
+            <h2 id="mainCaptcha"></h2>
+            <p><input type="button" id="refresh" onclick="Captcha();" value="Refresh Captcha"/></p>
+            <input type="text" id="txtInput" class="input-field" placeholder="Enter Captcha">    
+            <input type="text" placeholder="Username" class="input-field">
+            <input type="password" placeholder="Password" class="input-field">
+            <button class="button" onclick="verify()">Submit</button>
+            <p class="label">
+                Password should contain at least one number, one special character and one capital letter.
+            </p>
+        </div>
+    </div>
+</body>
+<script>
+    function verify() {
+        var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+        const password = document.querySelector('input[type="password"]').value;
+        const captchaInput = document.getElementById('txtInput').value;
+        const captchaValid = ValidCaptcha(); // Check if the captcha is valid
+
+        if (!regularExpression.test(password)) {
+            alert("Reminder: Password should contain at least one number, one special character and one capital letter.");
+        } else if (!captchaValid) { // If captcha is invalid
+            alert("Invalid captcha. Please try again.");
+        } else {
+            // For demonstration purposes, we will assume login is successful if password and captcha are valid
+            alert('You have logged in successfully!');
+        }
+
+        // Clear all input fields
+        document.querySelectorAll('input').forEach(input => input.value = "");
+    }
+
+    function Captcha(){
+        var alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var code = '';
+        for (var i = 0; i < 6; i++){
+            code += alpha.charAt(Math.floor(Math.random() * alpha.length));
+        }
+        document.getElementById("mainCaptcha").textContent = code;
+    }
+
+    function ValidCaptcha(){
+        var string1 = removeSpaces(document.getElementById('mainCaptcha').textContent);
+        var string2 = removeSpaces(document.getElementById('txtInput').value);
+        if (string1 === string2){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function removeSpaces(string){
+        return string.split(' ').join('');
+    }
+</script>
+</html>
