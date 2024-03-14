@@ -9,13 +9,13 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #004080; /* Dark Blue Button */
+            background-color: #004080; 
             font-family: 'Libre Franklin', sans-serif;
         }
 
         .container {
             border-radius: 10px;
-            background-color: #FFFFFF; /* White Container */
+            background-color: #FFFFFF; 
             padding: 20px;
             text-align: center;
         }
@@ -24,7 +24,7 @@
             width: 300px;
             height: 40px;
             margin-bottom: 20px;
-            border: 1px solid #B0CFF7; /* Light Blue Border */
+            border: 1px solid #B0CFF7; 
             border-radius: 5px;
             padding: 10px;
             box-sizing: border-box;
@@ -33,14 +33,14 @@
 
         .label {
             font-size: 18px;
-            color: #004080; /* Dark Blue Text */
+            color: #004080; 
         }
 
         .button {
             width: 200px;
             height: 50px;
-            background-color: #004080; /* Dark Blue Button */
-            color: #FFFFFF; /* White Text */
+            background-color: #004080; 
+            color: #FFFFFF; 
             border: none;
             border-radius: 5px;
             font-size: 18px;
@@ -49,18 +49,18 @@
         }
 
         .button:hover {
-            background-color: #00254D; /* Darker Blue on Hover */
+            background-color: #00254D; 
         }
 
         #mainCaptcha {
             font-size: 24px;
-            color: #004080; /* Dark Blue Text */
+            color: #004080; 
             margin-bottom: 10px;
         }
 
         #refresh {
-            background-color: #B0CFF7; /* Light Blue Button */
-            color: #000000; /* Black Text */
+            background-color: #B0CFF7;
+            color: #000000; 
             font-size: 16px;
             padding: 5px 10px;
             border: none;
@@ -69,7 +69,7 @@
         }
 
         #refresh:hover {
-            background-color: #80A6D7; /* Darker Blue on Hover */
+            background-color: #80A6D7; 
         }
         .heading{
             display: flex;
@@ -112,18 +112,16 @@
         var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
         const password = document.querySelector('input[type="password"]').value;
         const captchaInput = document.getElementById('txtInput').value;
-        const captchaValid = ValidCaptcha(); // Check if the captcha is valid
+        const captchaValid = ValidCaptcha();
 
         if (!regularExpression.test(password)) {
             alert("Reminder: Password should contain at least one number, one special character and one capital letter.");
-        } else if (!captchaValid) { // If captcha is invalid
+        } else if (!captchaValid) { 
             alert("Invalid captcha. Please try again.");
         } else {
-            // For demonstration purposes, we will assume login is successful if password and captcha are valid
             alert('You have logged in successfully!');
         }
 
-        // Clear all input fields
         document.querySelectorAll('input').forEach(input => input.value = "");
     }
 
